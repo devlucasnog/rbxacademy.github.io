@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:pay.kiwify.com.br)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "WebFetch(domain:csjdigital.com.br)"
+    ]
+  }
+}

@@ -1,0 +1,199 @@
+/* ============================================================
+   THEME — Edit these variables to restyle the entire page
+============================================================ */
+:root {
+  /* Backgrounds */
+  --bg-page:           #191A1F;
+  --bg-section-alt:    #131418;
+  --bg-card:           #1e2026;
+  --bg-card-border:    #2a2d35;
+
+  /* Brand colors */
+  --color-red:         #0989CF;
+  --color-red-hover:   #0776b5;
+  --color-red-dark:    #065d8f;
+  --color-red-badge:   #071d2e;
+  --color-green:       #16a34a;
+  --color-green-bg:    #0d2b1a;
+  --color-purple:      #7c3aed;
+
+  /* Text */
+  --text-primary:      #ffffff;
+  --text-muted:        #9ca3af;
+  --text-subtle:       #6b7280;
+
+  /* Hero radial vignette color */
+  --hero-glow:         #041524;
+
+  /* Pricing section glow color */
+  --pricing-glow:      #041524;
+}
+
+/* ============================================================
+   IMAGES — Edit these paths to swap images
+============================================================ */
+/* Hero image is set inline on the <img> tag for easy editing */
+
+/* ============================================================
+   BASE
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+/* ============================================================
+   REUSABLE COMPONENTS
+============================================================ */
+.badge {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: var(--color-red-badge);
+  color: var(--text-primary);
+  border: 1px solid var(--color-red-dark);
+}
+.badge-green {
+  background: var(--color-green-bg);
+  color: #4ade80;
+  border-color: var(--color-green);
+}
+
+.btn-primary {
+  display: inline-block;
+  background: var(--color-red);
+  color: #fff;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  border-radius: 10px;
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+.btn-primary:hover  { filter: brightness(1.12); }
+.btn-primary:active { transform: scale(0.97); }
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--bg-card-border);
+  border-radius: 16px;
+}
+
+.icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-red-badge);
+  flex-shrink: 0;
+}
+.icon-wrap svg { color: var(--color-red); width: 20px; height: 20px; }
+
+/* ============================================================
+   HERO VIGNETTE
+============================================================ */
+.hero-bg {
+  background: radial-gradient(ellipse at 50% 35%, var(--hero-glow) 0%, var(--bg-page) 65%);
+}
+
+/* ============================================================
+   FAQ ACCORDION
+============================================================ */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-icon { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); display: inline-block; }
+
+/* ============================================================
+   SMOOTH SCROLL + NAVBAR OFFSET
+============================================================ */
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 72px; }
+
+/* ============================================================
+   SCROLLBAR
+============================================================ */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-page); }
+::-webkit-scrollbar-thumb { background: var(--color-red-dark); border-radius: 3px; }
+
+/* ============================================================
+   CAROUSEL
+============================================================ */
+.carousel-container::-webkit-scrollbar { display: none; }
+.carousel-container { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* Transições suaves para os cards */
+.carousel-item {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.carousel-item .card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.carousel-item:hover .card {
+  border-color: var(--color-red-dark);
+  box-shadow: 0 8px 30px rgba(9, 137, 207, 0.2);
+}
+
+.carousel-item img {
+  transition: transform 0.3s ease;
+}
+
+.carousel-item:hover img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .carousel-item { width: 85vw; }
+}
+
+/* ============================================================
+   PRICING CARD ANIMATIONS
+============================================================ */
+@keyframes pricing-glow {
+  0%, 100% { box-shadow: 0 0 0 0 transparent, 0 0 24px rgba(9, 137, 207, 0.08); }
+  50%       { box-shadow: 0 0 0 3px rgba(9, 137, 207, 0.18), 0 0 48px rgba(9, 137, 207, 0.22); }
+}
+
+.pricing-card {
+  animation: pricing-glow 3s ease-in-out infinite;
+}
+
+@keyframes price-pulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.045); }
+}
+
+.price-number {
+  display: inline-block;
+  animation: price-pulse 2.8s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0%   { left: -65%; }
+  100% { left: 120%; }
+}
+
+.btn-pricing {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-pricing::after {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 -65%;
+  width: 55%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.22), transparent);
+  animation: shimmer 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
